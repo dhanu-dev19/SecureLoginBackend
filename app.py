@@ -25,7 +25,11 @@ app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 def get_db_connection():
-    return psycopg2.connect(DATABASE_URL)
+    try:
+        return psycopg2.connect(DATABASE_URL)
+    except Exception as e:
+        print("DATABASE CONNECTION ERROR:", e)
+        raise e
 
 # ---------------- REGISTER ----------------
 @app.route("/register", methods=["POST"])
