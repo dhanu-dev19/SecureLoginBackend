@@ -10,7 +10,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, origins=["https://securelogin-management.netlify.app/"])
+CORS(app, resources={
+    r"/*": {
+        "origins": [
+            "https://securelogin-management.netlify.app"
+        ]
+    }
+})
 
 bcrypt = Bcrypt(app)
 
